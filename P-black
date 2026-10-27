@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NL 动态海报 - 黑底版</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            background-color: #555; 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: "Helvetica Neue", Helvetica, Arial, "PingFang SC", "Microsoft YaHei", sans-serif;
+        }
+
+        .poster {
+            width: 375px;
+            height: 667px;
+            background-color: #000000; /* 👈 纯黑背景 */
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 35px; 
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+        }
+
+        .title-group {
+            text-align: center;
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .title-group h1 {
+            font-size: 32px; 
+            font-weight: 900; 
+            color: #ffffff; /* 白字 */
+            letter-spacing: 1px;
+        }
+        .title-group p {
+            font-size: 14px; 
+            color: #9ca3af; 
+            margin-top: 6px; 
+            font-weight: 500;
+        }
+
+        .nl-tag {
+            display: inline-block;
+            margin-top: 12px;
+            color: #f472b6; /* 亮粉色 */
+            font-size: 12px;
+            font-weight: 900; 
+            border: 1.5px solid #f472b6;
+            padding: 3px 10px;
+            border-radius: 2px; 
+            letter-spacing: 2px;
+            box-shadow: 0 0 10px rgba(244, 114, 182, 0.2); 
+        }
+
+        .ui-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 25px; 
+            z-index: 10;
+            position: relative; 
+            flex: 1; 
+            padding-bottom: 55px; 
+        }
+
+        .phone-mockup {
+            width: 190px;  
+            height: 410px; 
+            border-radius: 24px;
+            background-color: #111; 
+            box-shadow: 0 15px 35px rgba(0,0,0,0.8), 0 0 0 1px rgba(255,255,255,0.15); 
+            position: relative;
+            overflow: hidden;
+        }
+
+        .carousel { width: 100%; height: 100%; }
+        .carousel-item {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            display: none; 
+        }
+        .carousel-item.active { display: block; }
+        .carousel-item img { width: 100%; height: 100%; object-fit: cover; }
+
+        .caption-box {
+            margin-top: 15px;
+            height: 24px; 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            z-index: 5; 
+        }
+        .caption-text {
+            font-size: 16px;
+            color: #ffffff; /* 白字 */
+            font-weight: 600; 
+            letter-spacing: 1px;
+            display: none; 
+            text-shadow: 0 0 10px rgba(255,255,255,0.2); 
+        }
+        .caption-text.active { display: block; }
+
+        .qr-card {
+            position: absolute;
+            bottom: 85px; 
+            right: -45px; 
+            background: #ffffff; 
+            padding: 10px; 
+            border-radius: 14px; 
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            z-index: 20;
+            box-shadow: -8px 15px 40px rgba(244, 114, 182, 0.25), 0 0 20px rgba(244, 114, 182, 0.1); 
+            border: 1px solid rgba(244, 114, 182, 0.2); 
+        }
+        
+        .qr-img-wrap {
+            position: relative;
+            width: 85px;
+            height: 85px;
+            overflow: hidden;
+            border-radius: 4px;
+        }
+
+        .qr-img-wrap img { width: 100%; height: 100%; object-fit: cover; }
+
+        .scan-line {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px; 
+            background-color: #f472b6; /* 亮粉激光 */
+            box-shadow: 0 0 10px 2px #f472b6, 0 0 4px 1px #fff; 
+            animation: scan 2s infinite linear;
+            z-index: 10;
+            opacity: 0.9;
+        }
+
+        @keyframes scan {
+            0% { top: -5%; opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { top: 105%; opacity: 0; }
+        }
+
+        .qr-card span { 
+            font-size: 11px; 
+            color: #000; 
+            font-weight: 900; 
+            margin-top: 6px; 
+            white-space: nowrap;
+        }
+    </style>
+</head>
+<body>
+    <div class="poster">
+        <div class="title-group">
+            <h1>先预览，再定制</h1>
+            <p>Donek滑雪板 极简设计工具</p>
+            <div class="nl-tag">NL 原创独立开发</div>
+        </div>
+
+        <div class="ui-wrapper">
+            <div class="phone-mockup">
+                <div class="carousel">
+                    <!-- 👇 已经换成了你的 GitHub 截图链接 -->
+                    <div class="carousel-item active"><img src="https://cdn.jsdelivr.net/gh/rrrredddd/donek@main/UI1.png" alt=""></div>
+                    <div class="carousel-item"><img src="https://cdn.jsdelivr.net/gh/rrrredddd/donek@main/UI2.png" alt=""></div>
+                    <div class="carousel-item"><img src="https://cdn.jsdelivr.net/gh/rrrredddd/donek@main/UI3.png" alt=""></div>
+                    <div class="carousel-item"><img src="https://cdn.jsdelivr.net/gh/rrrredddd/donek@main/UI4.png" alt=""></div>
+                    <div class="carousel-item"><img src="https://cdn.jsdelivr.net/gh/rrrredddd/donek@main/UI5.png" alt=""></div>
+                    <div class="carousel-item"><img src="https://cdn.jsdelivr.net/gh/rrrredddd/donek@main/UI6.png" alt=""></div>
+                </div>
+            </div>
+
+            <div class="qr-card">
+                <div class="qr-img-wrap">
+                    <!-- ⚠️ 修改这里：把文件名换成你真实的二维码图片名字 -->
+                    <img src="https://cdn.jsdelivr.net/gh/rrrredddd/donek@main/qr.png" alt="二维码">
+                    <div class="scan-line"></div>
+                </div>
+                <span>截图后微信扫码</span>
+            </div>
+
+            <div class="caption-box">
+                <div class="caption-text active">🎨 随心配色</div>
+                <div class="caption-text">🖌️ 设计图预览</div>
+                <div class="caption-text">📸 图库展示</div>
+                <div class="caption-text">📦 定制流程</div>
+                <div class="caption-text">🔥 现货展示</div>
+                <div class="caption-text">♻️ 二手转卖</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const images = document.querySelectorAll('.carousel-item');
+            const texts = document.querySelectorAll('.caption-text');
+            let currentIndex = 0;
+
+            setInterval(() => {
+                images[currentIndex].classList.remove('active');
+                texts[currentIndex].classList.remove('active');
+                
+                currentIndex = (currentIndex + 1) % images.length;
+                
+                images[currentIndex].classList.add('active');
+                texts[currentIndex].classList.add('active');
+            }, 1000); 
+        });
+    </script>
+</body>
+</html>
