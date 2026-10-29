@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>NL 教练 · 单板八字刻滑</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'PingFang SC', 'Microsoft YaHei', -apple-system, sans-serif; }
+        
+        /* 优化手机端全屏体验 */
+        body { 
+            background: #05080c; 
+            display: flex; justify-content: center; align-items: center;
+            min-height: 100vh; padding: 20px; 
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        .poster {
+            width: 100%; max-width: 720px; 
+            background: #0d151f; border: 1px solid #1e2e42; 
+            border-radius: 24px; overflow: hidden;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.8), 0 0 0 1px rgba(255,255,255,0.05) inset;
+            color: #fff;
+        }
+
+        .header { 
+            padding: 45px 40px 35px; 
+            text-align: center; position: relative;
+            border-bottom: 1px solid #1e2e42;
+        }
+        
+        .header::before {
+            content: "❄"; position: absolute; top: 5px; left: 20px; 
+            font-size: 140px; color: rgba(255,255,255,0.02); pointer-events: none;
+        }
+
+        .coach-name {
+            font-size: 0.9rem; color: #7da8d3; 
+            letter-spacing: 5px; font-weight: 700;
+            margin-bottom: 15px; text-transform: uppercase;
+        }
+
+        .header h1 { 
+            font-size: 2.8rem; font-weight: 900; letter-spacing: 2px; 
+            background: linear-gradient(to right, #ffffff, #7da8d3); 
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; 
+            line-height: 1.2; margin-bottom: 15px;
+        }
+        
+        .header .slogan { 
+            color: #ff7e2f; font-size: 1.15rem; letter-spacing: 2px; 
+            font-weight: 600; display: block;
+        }
+
+        .content { padding: 35px 40px 25px 40px; }
+        
+        .features { 
+            display: flex; justify-content: space-between; margin-bottom: 30px; 
+            background: #111c28; padding: 20px 20px;
+            border-radius: 16px; border: 1px solid #1e2e42;
+        }
+        
+        .feature { text-align: center; flex: 1; position: relative; }
+        .feature:not(:last-child)::after {
+            content: ""; position: absolute; right: 0; top: 20%; height: 60%; width: 1px; background: #1e2e42;
+        }
+        .feature i { font-size: 1.6rem; color: #ff7e2f; margin-bottom: 10px; }
+        .feature p { font-size: 0.95rem; color: #b0c4d9; font-weight: 500; }
+
+        .pricing { display: flex; gap: 24px; margin-bottom: 25px; align-items: stretch; }
+        
+        .card { 
+            flex: 1; background: #111c28; border-radius: 20px; 
+            padding: 28px 24px; border: 1px solid #1e2e42; 
+            position: relative; display: flex; flex-direction: column;
+        }
+        
+        .card.premium { 
+            border: 1px solid #ff7e2f; 
+            box-shadow: 0 0 30px rgba(255, 126, 47, 0.12); 
+            background: linear-gradient(180deg, #111c28 0%, #1a1817 100%); 
+        }
+        
+        .badge { 
+            position: absolute; top: -12px; left: 50%; transform: translateX(-50%); 
+            background: linear-gradient(90deg, #ff7e2f, #ff5500); color: #fff; 
+            font-weight: 800; font-size: 0.85rem; padding: 6px 18px; 
+            border-radius: 20px; white-space: nowrap; 
+            box-shadow: 0 4px 12px rgba(255,85,0,0.4); letter-spacing: 1px;
+        }
+        
+        .title { font-size: 1.15rem; color: #b0c4d9; margin-bottom: 12px; font-weight: 600; }
+        .card.premium .title { color: #ffb347; }
+        
+        .num { font-size: 3.2rem; font-weight: 900; color: #fff; margin-bottom: 20px; line-height: 1; letter-spacing: -1px; }
+        .num small { font-size: 1rem; color: #7da8d3; font-weight: 500; letter-spacing: 0; }
+        
+        .desc { font-size: 0.92rem; color: #8da4bd; line-height: 1.8; margin-top: auto; }
+        .desc li { list-style: none; margin-bottom: 12px; display: flex; align-items: flex-start; }
+        .desc i { color: #ff7e2f; margin-right: 10px; font-size: 0.8rem; margin-top: 5px; }
+
+        .highlight-text { color: #ffb347; font-weight: bold; }
+
+        .global-notice {
+            background: rgba(255, 126, 47, 0.1); border: 1px solid rgba(255, 126, 47, 0.3);
+            color: #ffb347; font-size: 0.95rem; font-weight: 600;
+            padding: 12px 20px; border-radius: 12px; margin-bottom: 20px;
+            display: flex; align-items: center; justify-content: center; gap: 8px; letter-spacing: 1px;
+        }
+
+        .advantages {
+            background: rgba(125, 168, 211, 0.08); border: 1px solid rgba(125, 168, 211, 0.2);
+            border-radius: 16px; padding: 16px 20px; margin-bottom: 25px;
+            display: flex; flex-wrap: wrap; justify-content: center; gap: 12px 20px; 
+        }
+
+        .adv-item {
+            display: flex; align-items: center; gap: 6px; font-size: 0.9rem;
+            color: #d1e3f3; font-weight: 600; width: 30%; min-width: 140px; justify-content: flex-start;
+        }
+
+        .adv-item i { color: #ffb347; font-size: 1.1rem; }
+
+        .footer { 
+            background: #080e14; padding: 28px 40px; display: flex; 
+            justify-content: space-between; align-items: center; border-top: 1px solid #1e2e42; 
+        }
+        
+        .info h4 { font-size: 1.15rem; color: #fff; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; font-weight: 600; }
+        .info h4 i { color: #ff7e2f; }
+        .info h4 span { color: #ff7e2f; font-weight: 900; font-size: 1.3rem; }
+        .info p { font-size: 0.9rem; color: #7da8d3; }
+        .info p span { color: #b0c4d9; font-weight: bold; }
+        
+        .contact { display: flex; align-items: center; gap: 20px; }
+        .contact-text { font-size: 0.95rem; color: #b0c4d9; line-height: 1.8; text-align: right; font-weight: 500; }
+        .contact-text i { color: #ff7e2f; width: 18px; }
+        
+        /* 优化二维码展示：白底，完美容纳图片 */
+        .qr { 
+            width: 70px; height: 70px; 
+            background: #ffffff; 
+            border-radius: 12px; 
+            display: flex; align-items: center; justify-content: center; 
+            overflow: hidden;
+            padding: 4px;
+        }
+        .qr img {
+            width: 100%; height: 100%; object-fit: contain;
+        }
+
+        @media (max-width: 650px) {
+            .header h1 { font-size: 2.2rem; }
+            .pricing { flex-direction: column; gap: 20px; }
+            .footer { flex-direction: column; align-items: flex-start; gap: 20px; }
+            .contact { width: 100%; justify-content: space-between; }
+            .contact-text { text-align: left; }
+            .features { flex-direction: column; gap: 15px; padding: 20px; }
+            .feature:not(:last-child)::after { display: none; }
+            .feature { display: flex; align-items: center; gap: 10px; text-align: left; }
+            .feature i { margin-bottom: 0; }
+            .advantages { padding: 15px; gap: 10px; }
+            .adv-item { width: 45%; min-width: 120px; font-size: 0.85rem; }
+            .global-notice { font-size: 0.85rem; padding: 10px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="poster">
+        <div class="header">
+            <div class="coach-name">COACH · NL</div>
+            <h1>单板八字刻滑</h1>
+            <div class="slogan">极致的细节拆解 / 科学的身体控制</div>
+        </div>
+
+        <div class="content">
+            <div class="features">
+                <div class="feature"><i class="fas fa-snowboarding"></i><p>主教换刃以上进阶</p></div>
+                <div class="feature"><i class="fas fa-video"></i><p>线上+线下视频复盘</p></div>
+                <div class="feature"><i class="fas fa-mountain"></i><p>全雪季系统训练</p></div>
+            </div>
+
+            <div class="pricing">
+                <div class="card">
+                    <div class="title">单次私教体验</div>
+                    <div class="num">¥1500<small> / 3小时</small></div>
+                    <ul class="desc">
+                        <li><i class="fas fa-check"></i> 适合体验 / 短期突破提升</li>
+                        <li><i class="fas fa-check"></i> 跟拍记录 + 实时动作纠错</li>
+                        <li><i class="fas fa-check"></i> 结伴同修：每加1人 <span class="highlight-text">+500</span></li>
+                    </ul>
+                </div>
+                
+                <div class="card premium">
+                    <div class="badge">🔥 限招 2 人</div>
+                    <div class="title">雪季长期学员</div>
+                    <div class="num">¥1.5w<small> / 整个雪季</small></div>
+                    <ul class="desc">
+                        <li><i class="fas fa-check"></i> 超12次线下深度实操 (支持跨季）</li>
+                        <li><i class="fas fa-check"></i> 视频逐帧分析 + 定制计划</li>
+                        <li><i class="fas fa-check"></i> 优先排期 + 全天候答疑跟进</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="global-notice">
+                <span>🏮</span> 覆盖春节 · 随时可约（单次/长期均适用）
+            </div>
+
+            <div class="advantages">
+                <div class="adv-item"><i class="fas fa-graduation-cap"></i> 博士学历背景</div>
+                <div class="adv-item"><i class="fas fa-dumbbell"></i> 10年系统健身</div>
+                <div class="adv-item"><i class="fas fa-heartbeat"></i> 康复级体能计划</div>
+                <div class="adv-item"><i class="fas fa-search"></i> 极度耐心拆解</div>
+                <div class="adv-item"><i class="fas fa-female"></i> 女性视角指导</div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <div class="info">
+                <h4><i class="fas fa-location-dot"></i> 主教场地：<span>崇礼</span></h4>
+                <p>年底可可托海行程可约 | 持 <span>CASI & 国职</span> 双认证</p>
+            </div>
+            <div class="contact">
+                <div class="contact-text">
+                    <div style="font-weight:800; font-size:1.05rem; color:#fff; margin-bottom:4px;">NL 教练</div>
+                    <div><i class="fab fa-weixin"></i> donekdaiding</div>
+                </div>
+                <!-- 二维码图片区域 -->
+<div class="qr">
+    <img src="https://raw.githubusercontent.com/rrrredddd/donek/main/qrcode.png" alt="扫码咨询">
+</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
