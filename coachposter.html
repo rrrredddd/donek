@@ -2,22 +2,24 @@
 <html lang="zh">
 <head>
     <meta charset="UTF-8">
-    <!-- 🚨 关键修改：强制手机按电脑端的宽度（720px）渲染并自动缩放，保证排版绝对不变形 -->
-    <meta name="viewport" content="width=720, initial-scale=0.5, maximum-scale=1.0, user-scalable=no">
+    <!-- 允许缩放，但设定初始宽度为 720 -->
+    <meta name="viewport" content="width=720, initial-scale=0.5, maximum-scale=2.0, user-scalable=yes">
     <title>NL 教练 · 单板八字刻滑</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'PingFang SC', 'Microsoft YaHei', -apple-system, sans-serif; }
         
-        body { 
+        /* 🚨 核心：强制整个页面最小宽度为 720px，绝对不缩水 */
+        html, body {
+            min-width: 720px; 
             background: #05080c; 
             display: flex; justify-content: center; align-items: center;
             min-height: 100vh; padding: 20px; 
-            -webkit-tap-highlight-color: transparent;
+            overflow-x: auto; /* 如果屏幕太小，允许横向滚动，而不是挤压排版 */
         }
         
         .poster {
-            width: 100%; max-width: 720px; 
+            width: 720px; /* 写死宽度 */
             background: #0d151f; border: 1px solid #1e2e42; 
             border-radius: 24px; overflow: hidden;
             box-shadow: 0 30px 60px rgba(0,0,0,0.8), 0 0 0 1px rgba(255,255,255,0.05) inset;
@@ -56,7 +58,8 @@
         .content { padding: 35px 40px 25px 40px; }
         
         .features { 
-            display: flex; justify-content: space-between; margin-bottom: 30px; 
+            display: flex; flex-wrap: nowrap; /* 绝对不换行 */
+            justify-content: space-between; margin-bottom: 30px; 
             background: #111c28; padding: 20px 20px;
             border-radius: 16px; border: 1px solid #1e2e42;
         }
@@ -68,10 +71,12 @@
         .feature i { font-size: 1.6rem; color: #ff7e2f; margin-bottom: 10px; }
         .feature p { font-size: 0.95rem; color: #b0c4d9; font-weight: 500; }
 
-        .pricing { display: flex; gap: 24px; margin-bottom: 25px; align-items: stretch; }
+        /* 🚨 核心：强制左右并排，绝对不折叠 */
+        .pricing { display: flex; flex-wrap: nowrap; gap: 24px; margin-bottom: 25px; align-items: stretch; }
         
         .card { 
-            flex: 1; background: #111c28; border-radius: 20px; 
+            width: 50%; /* 强制平分宽度 */
+            background: #111c28; border-radius: 20px; 
             padding: 28px 24px; border: 1px solid #1e2e42; 
             position: relative; display: flex; flex-direction: column;
         }
@@ -117,13 +122,13 @@
 
         .adv-item {
             display: flex; align-items: center; gap: 6px; font-size: 0.9rem;
-            color: #d1e3f3; font-weight: 600; width: 30%; min-width: 140px; justify-content: flex-start;
+            color: #d1e3f3; font-weight: 600; width: 30%; justify-content: flex-start;
         }
 
         .adv-item i { color: #ffb347; font-size: 1.1rem; }
 
         .footer { 
-            background: #080e14; padding: 28px 40px; display: flex; 
+            background: #080e14; padding: 28px 40px; display: flex; flex-wrap: nowrap;
             justify-content: space-between; align-items: center; border-top: 1px solid #1e2e42; 
         }
         
@@ -142,14 +147,11 @@
             background: #ffffff; 
             border-radius: 12px; 
             display: flex; align-items: center; justify-content: center; 
-            overflow: hidden;
-            padding: 4px;
+            overflow: hidden; padding: 4px;
         }
-        .qr img {
-            width: 100%; height: 100%; object-fit: contain;
-        }
+        .qr img { width: 100%; height: 100%; object-fit: contain; }
 
-        /* 🚨 关键修改：这里我删除了所有 @media (max-width: 650px) 的代码，这样手机上就绝对不会变成竖排了 */
+        /* 🚨 终极绝招：这里没有任何 @media，只有简单的缩放支持，绝不改变排版 */
     </style>
 </head>
 <body>
